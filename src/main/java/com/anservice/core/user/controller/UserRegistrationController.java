@@ -25,6 +25,8 @@ public class UserRegistrationController {
     public ResponseEntity<String> basicJoin(
             @RequestBody User user) {
 
+        Object tempValue = registrationService.joinUser();
+
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 }
