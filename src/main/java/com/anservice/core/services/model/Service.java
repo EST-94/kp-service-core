@@ -1,4 +1,4 @@
-package com.anservice.core.user.model;
+package com.anservice.core.services.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
