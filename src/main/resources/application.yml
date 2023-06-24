@@ -14,3 +14,23 @@ spring:
     url: jdbc:h2:~/test  # H2 접속 정보
     username: sa
     password: 1111
+
+# for OAS setting
+# ref : https://springdoc.org/v2/#getting-started
+# ref : https://jeonyoungho.github.io/posts/Open-API-3.0-Swagger-v3/
+springdoc:
+#  version: '@project.version@'
+  packagesToScan: com.anservice.core
+  api-docs:
+    path: /api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+#    path: /swagger-ui.html
+#    disable-swagger-default-url: true
+    enabled: true
+    display-query-params-without-oauth2: true
+  paths-to-match:
+    - /api/v1/**
