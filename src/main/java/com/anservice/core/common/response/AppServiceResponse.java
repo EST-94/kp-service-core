@@ -2,7 +2,7 @@ package com.anservice.core.common.response;
 
 import org.springframework.http.HttpStatus;
 
-public class CreateResponse {
+public class AppServiceResponse {
 
     private String taskName;
     private String errorCode;
@@ -15,3 +15,4 @@ public class CreateResponse {
         this.taskStatus = "STARTED";
     }
 }
+

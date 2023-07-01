@@ -1,5 +1,6 @@
 package com.anservice.core.user.service;
 
+import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
 import com.anservice.core.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,17 +15,29 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserRepository userRepository;
 
     @Override
-    public Object joinUser(User user) {
-        return userRepository.save(user);
+    public UserServiceResponse joinUser(User user) {
+
+        UserServiceResponse response = new UserServiceResponse();
+        String taskName = "joinUser";
+        response.setDefault(taskName);
+
+        try {
+            userRepository.save(user);
+        } catch (RuntimeException e) {
+//            response.setFailed(CONSTANTS_MEG_HERE);
+            log.error("[{}] failed, trace : {}", taskName, e.toString());
+        }
+
+        return response;
     }
 
     @Override
-    public Object deleteUser() {
+    public UserServiceResponse deleteUser() {
         return null;
     }
 
     @Override
-    public Object ModifyUser() {
+    public UserServiceResponse ModifyUser() {
         return null;
     }
 }

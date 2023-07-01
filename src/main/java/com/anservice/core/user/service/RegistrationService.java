@@ -1,5 +1,6 @@
 package com.anservice.core.user.service;
 
+import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,10 @@ public interface RegistrationService {
     User CRUD.
      */
 
-    Object joinUser(User user);
+    UserServiceResponse joinUser(User user);
 
-    Object deleteUser();
+    UserServiceResponse deleteUser();
 
-    Object ModifyUser();
+    UserServiceResponse ModifyUser();
 
 }

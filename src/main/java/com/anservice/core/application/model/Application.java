@@ -1,4 +1,4 @@
-package com.anservice.core.services.model;
+package com.anservice.core.application.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 @Entity
 @RequiredArgsConstructor
-public class Service {
+public class Application {
 
     /*
     service attributes will contain
