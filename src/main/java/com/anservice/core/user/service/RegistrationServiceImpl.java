@@ -15,10 +15,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserRepository userRepository;
 
     @Override
-    public UserServiceResponse joinUser(User user) {
+    public UserServiceResponse submitUser(User user) {
 
         UserServiceResponse response = new UserServiceResponse();
-        String taskName = "joinUser";
+        String taskName = "submitUser";
         response.setDefault(taskName);
 
         try {

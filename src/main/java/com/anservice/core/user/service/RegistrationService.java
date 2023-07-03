@@ -11,7 +11,7 @@ public interface RegistrationService {
     User CRUD.
      */
 
-    UserServiceResponse joinUser(User user);
+    UserServiceResponse submitUser(User user);
 
     UserServiceResponse deleteUser();
 

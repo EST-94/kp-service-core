@@ -1,7 +1,11 @@
 package com.anservice.core.user.controller;
 
+import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
 import com.anservice.core.user.service.RegistrationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/users")
-@Tag(name = "USERS")
+@RequestMapping(path = "/v1/users")
+@Tag(name = "Registration", description = "about registration operations.")
 @Slf4j
 public class UserRegistrationController {
 
@@ -24,14 +28,15 @@ public class UserRegistrationController {
      * @param user info of target member
      * @return       join result
      */
-    @PostMapping("/v1/submit")
-    public ResponseEntity<String> basicJoin(
+    @Operation(summary = "submit user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "submit success")
+    })
+    @PostMapping("/submit")
+    public ResponseEntity<UserServiceResponse> submitUser(
             @RequestBody User user) {
 
-        log.info("Called User Info : {}", user);
-        registrationService.joinUser(user);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(registrationService.submitUser(user), HttpStatus.OK);
     }
 
     @GetMapping("/tester")

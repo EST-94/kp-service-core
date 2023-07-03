@@ -29,11 +29,12 @@ dependencies {
 	// OAC
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+//	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 
 
 	// Security
 	// xss
-	implementation group: 'com.navercorp.rucy', name: 'lucy-xss', version: '1.6.3'
+//	implementation group: 'com.navercorp.rucy', name: 'lucy-xss', version: '1.6.3'
 
 
 	// Code Analysis
