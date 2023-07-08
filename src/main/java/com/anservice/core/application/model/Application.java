@@ -22,6 +22,7 @@ public class Application {
     @Id
     public int serviceId;
     public String serviceName;
+    public String serviceUrl;
     public String description;
     public int userAmount;
     public Date createDt;

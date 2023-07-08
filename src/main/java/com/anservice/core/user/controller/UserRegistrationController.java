@@ -3,6 +3,7 @@ package com.anservice.core.user.controller;
 import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
 import com.anservice.core.user.service.RegistrationService;
+import com.google.gson.Gson;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/v1/users")
-@Tag(name = "Registration", description = "about registration operations.")
+@RequestMapping(path = "/v1/kpc/users")
+@Tag(name = "User Registration", description = "about registration operations.")
 @Slf4j
 public class UserRegistrationController {
 
     private final RegistrationService registrationService;
+
+    private final Gson gson;
 
     /**
      * Sample join method of member.
@@ -32,15 +35,20 @@ public class UserRegistrationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "submit success")
     })
-    @PostMapping("/submit")
+    @PostMapping("/registration")
     public ResponseEntity<UserServiceResponse> submitUser(
             @RequestBody User user) {
 
         return new ResponseEntity<>(registrationService.submitUser(user), HttpStatus.OK);
     }
 
-    @GetMapping("/tester")
-    public ResponseEntity<String> aa() {
-        return new ResponseEntity<>("asd", HttpStatus.OK);
+    @Operation(summary = "delete user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "delete success")
+    })
+    @DeleteMapping
+    public ResponseEntity<String> deleteUser(
+            @RequestParam("userId") String userId) {
+        return new ResponseEntity<>(gson.toJson("asd"), HttpStatus.OK);
     }
 }
