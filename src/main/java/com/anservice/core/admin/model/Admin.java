@@ -1,4 +1,4 @@
-package com.anservice.core.user.model;
+package com.anservice.core.admin.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -12,20 +12,20 @@ import java.util.Date;
 @Builder
 @Entity
 @RequiredArgsConstructor
-@Table(name = "kp_user")
-public class User {
+@Table(name = "kp_admin")
+public class Admin {
 
     /*
-    user attributes will contain
+    admin attributes will contain
      */
 
     public static final long PID = 0; // Adjust 'AtomicLong' when concurrent issue occurs.
     @Id
-    @Column(name = "user_id", updatable = false)
+    @Column(name = "uid", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public String uid;
 
-    @Column(name = "user_name")
+    @Column(name = "admin_name")
     @Schema(defaultValue = "example1994")
     public String userName;
 
@@ -40,18 +40,6 @@ public class User {
     @Column(name = "email")
     @Schema(defaultValue = "bxob1040@gmail.com")
     public String email;
-
-    @Column(name = "age")
-    @Schema(defaultValue = "20")
-    public int age;
-
-    @Column(name = "sex")
-    @Schema(defaultValue = "male")
-    public String sex;
-
-    @Column(name = "init_service_name")
-    @Schema(defaultValue = "MBTITester")
-    public String initServiceName;
 
     @Column(name = "created_dt")
     @Schema(defaultValue = "20230624220011")

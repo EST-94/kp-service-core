@@ -18,9 +18,9 @@ public class Application {
     service attributes will contain
      */
 
-    public long PID;
+    public static final long PID = 0;
     @Id
-    public int serviceId;
+    public String uid;
     public String serviceName;
     public String serviceUrl;
     public String description;

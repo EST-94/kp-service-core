@@ -3,7 +3,6 @@ package com.anservice.core.user.controller;
 import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
 import com.anservice.core.user.service.RegistrationService;
-import com.google.gson.Gson;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -23,12 +22,10 @@ public class UserRegistrationController {
 
     private final RegistrationService registrationService;
 
-    private final Gson gson;
-
     /**
-     * Sample join method of member.
+     * add member.
      *
-     * @param user info of target member
+     * @param user   info of target member
      * @return       join result
      */
     @Operation(summary = "submit user")
@@ -38,17 +35,21 @@ public class UserRegistrationController {
     @PostMapping("/registration")
     public ResponseEntity<UserServiceResponse> submitUser(
             @RequestBody User user) {
-
         return new ResponseEntity<>(registrationService.submitUser(user), HttpStatus.OK);
     }
 
+    /**
+     * delete member.
+     * @param userId    uid of target member
+     * @return          delete result
+     */
     @Operation(summary = "delete user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "delete success")
     })
     @DeleteMapping
-    public ResponseEntity<String> deleteUser(
+    public ResponseEntity<UserServiceResponse> deleteUser(
             @RequestParam("userId") String userId) {
-        return new ResponseEntity<>(gson.toJson("asd"), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
