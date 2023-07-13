@@ -30,7 +30,7 @@ public class AppRegistrationController {
     @PostMapping("/registration")
     public ResponseEntity<AppServiceResponse> submitApplication(
             @RequestBody Application application) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
