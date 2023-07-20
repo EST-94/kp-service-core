@@ -62,7 +62,7 @@ public class AppManagementController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "update success")
     })
-    @PatchMapping
+    @PatchMapping("/pic")
     public ResponseEntity<AppServiceResponse> updateApplicationPicture(
             @RequestParam("appId") String appId,
             @RequestBody Application application) {

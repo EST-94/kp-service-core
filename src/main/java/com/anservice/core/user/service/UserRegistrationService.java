@@ -5,7 +5,7 @@ import com.anservice.core.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface RegistrationService {
+public interface UserRegistrationService {
 
     /*
     User CRUD.
@@ -13,8 +13,6 @@ public interface RegistrationService {
 
     UserServiceResponse submitUser(User user);
 
-    UserServiceResponse deleteUser();
-
-    UserServiceResponse ModifyUser();
+    UserServiceResponse deleteUser(String userId);
 
 }

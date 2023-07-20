@@ -11,9 +11,9 @@ spring:
       path: /h2-console # localhost:8080/h2-console
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/test  # H2 접속 정보
+    url: jdbc:h2:tcp://localhost/~/kplatform  # H2 접속 정보
     username: sa
-    password: 1111
+    password:
 
 # for OAS setting
 # ref : https://springdoc.org/v2/#getting-started

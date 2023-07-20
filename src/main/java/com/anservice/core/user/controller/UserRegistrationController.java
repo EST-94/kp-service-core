@@ -2,7 +2,7 @@ package com.anservice.core.user.controller;
 
 import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
-import com.anservice.core.user.service.RegistrationService;
+import com.anservice.core.user.service.UserRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UserRegistrationController {
 
-    private final RegistrationService registrationService;
+    private final UserRegistrationService userRegistrationService;
 
     /**
      * add member.
@@ -35,7 +35,7 @@ public class UserRegistrationController {
     @PostMapping("/registration")
     public ResponseEntity<UserServiceResponse> submitUser(
             @RequestBody User user) {
-        return new ResponseEntity<>(registrationService.submitUser(user), HttpStatus.OK);
+        return new ResponseEntity<>(userRegistrationService.submitUser(user), HttpStatus.OK);
     }
 
     /**
@@ -50,6 +50,6 @@ public class UserRegistrationController {
     @DeleteMapping
     public ResponseEntity<UserServiceResponse> deleteUser(
             @RequestParam("userId") String userId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userRegistrationService.deleteUser(userId), HttpStatus.OK);
     }
 }

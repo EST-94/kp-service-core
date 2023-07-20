@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -20,9 +21,16 @@ public class User {
      */
 
     public static final long PID = 0; // Adjust 'AtomicLong' when concurrent issue occurs.
+
+    // TODO : after change datasource, convert to this form.
+//    @Id
+//    @Column(name = "user_id", updatable = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    public String uid;
+
     @Id
     @Column(name = "user_id", updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
     public String uid;
 
     @Column(name = "user_name")
@@ -54,10 +62,12 @@ public class User {
     public String initServiceName;
 
     @Column(name = "created_dt")
+    @Setter
     @Schema(defaultValue = "20230624220011")
     public Date createDt;
 
     @Column(name = "modified_dt")
+    @Setter
     @Schema(defaultValue = "20230624220011")
     public Date modifiedDt;
 }
