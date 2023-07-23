@@ -23,7 +23,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     public UserServiceResponse submitUser(User user) {
 
         UserServiceResponse response = new UserServiceResponse();
-        String taskName = "submitUser";
         response.setDefault("submitUser");
 
         user.setUid("test-" + generateUtil.randomString(5));
@@ -34,8 +33,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             userRepository.save(user);
             response.setSuccess();
         } catch (RuntimeException e) {
-            response.setFailed(InternalTaskResponse.USER_INSERT_FAILED);
-            log.error("[{}] failed, trace : {}", taskName, e.toString());
+            response.setFailed(InternalTaskResponse.USER_INSERT_FAILED, e);
         }
 
         return response;
@@ -46,15 +44,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     public UserServiceResponse deleteUser(String userId) {
 
         UserServiceResponse response = new UserServiceResponse();
-        String taskName = "deleteUser";
-        response.setDefault(taskName);
+        response.setDefault("deleteUser");
 
         try {
             userRepository.deleteByUid(userId);
             response.setSuccess();
         } catch (RuntimeException e) {
-            response.setFailed(InternalTaskResponse.USER_DELETE_FAILED);
-            log.error("[{}] failed, trace : {}", taskName, e.toString());
+            response.setFailed(InternalTaskResponse.USER_DELETE_FAILED, e);
         }
 
         return response;

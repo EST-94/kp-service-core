@@ -3,9 +3,11 @@ package com.anservice.core.common.response;
 import com.anservice.core.common.constants.InternalTaskResponse;
 import com.anservice.core.common.status.TaskStatus;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 @Getter
+@Slf4j
 public class UserServiceResponse {
 
     private String taskName;
@@ -19,13 +21,23 @@ public class UserServiceResponse {
         this.taskStatus = TaskStatus.STARTED;
     }
 
-    public void setFailed(InternalTaskResponse response) {
+    public void setFailed(InternalTaskResponse response, RuntimeException e) {
         this.taskStatus = response.getTaskStatus();
         this.errorMsg = response.getErrorMsg();
         this.responseStatus = response.getErrorStatus();
+        log.error("[{}] failed, trace : {}", this.taskName, e.toString());
     }
 
     public void setSuccess() {
         this.taskStatus = TaskStatus.SUCCESS;
+    }
+
+    @Override
+    public String toString() {
+        return "[UserServiceResponse] [taskName : " + this.taskName
+                + ", errorCode : " + this.errorCode
+                + ", errorMsg : " + this.errorMsg
+                + ", taskStatus : " + this.taskStatus
+                + ", responseStatus : " + this.responseStatus + "]";
     }
 }

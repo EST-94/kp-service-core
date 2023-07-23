@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(path = "/v1/kpc/users")
 @Tag(name = "User Registration", description = "about registration operations.")
-@Slf4j
 public class UserRegistrationController {
 
     private final UserRegistrationService userRegistrationService;
@@ -34,7 +33,7 @@ public class UserRegistrationController {
     })
     @PostMapping("/registration")
     public ResponseEntity<UserServiceResponse> submitUser(
-            @RequestBody User user) {
+            @RequestBody @NotNull User user) {
         return new ResponseEntity<>(userRegistrationService.submitUser(user), HttpStatus.OK);
     }
 
@@ -49,7 +48,7 @@ public class UserRegistrationController {
     })
     @DeleteMapping
     public ResponseEntity<UserServiceResponse> deleteUser(
-            @RequestParam("userId") String userId) {
+            @RequestParam("userId") @NotNull String userId) {
         return new ResponseEntity<>(userRegistrationService.deleteUser(userId), HttpStatus.OK);
     }
 }

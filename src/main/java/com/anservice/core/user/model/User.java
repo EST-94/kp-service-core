@@ -18,15 +18,11 @@ public class User {
 
     /*
     user attributes will contain
+    -- Adjust 'AtomicLong' when concurrent issue occurs.
+    -- After select DB engine, Adjust '@GeneratedValue(strategy = GenerationType.IDENTITY)' to @Id
      */
 
-    public static final long PID = 0; // Adjust 'AtomicLong' when concurrent issue occurs.
-
-    // TODO : after change datasource, convert to this form.
-//    @Id
-//    @Column(name = "user_id", updatable = false)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    public String uid;
+    public static final long PID = 0;
 
     @Id
     @Column(name = "user_id", updatable = false)
