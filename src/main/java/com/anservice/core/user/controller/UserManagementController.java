@@ -2,12 +2,14 @@ package com.anservice.core.user.controller;
 
 import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.user.model.User;
+import com.anservice.core.user.service.UserManagementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "User Management", description = "about management operations.")
 public class UserManagementController {
+
+    private final UserManagementService userManagementService;
 
     @Operation(summary = "get user information")
     @ApiResponses(value = {
@@ -35,9 +39,10 @@ public class UserManagementController {
             @ApiResponse(responseCode = "200", description = "update success")
     })
     @PatchMapping
-    public ResponseEntity<String> updateUser(
-            @RequestParam String userId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<UserServiceResponse> updateUser(
+            @RequestParam String userId,
+            @RequestBody User user) throws ChangeSetPersister.NotFoundException {
+        return new ResponseEntity<>(userManagementService.modifyUser(user, userId), HttpStatus.OK);
     }
 
     @Operation(summary = "update personal profile img")

@@ -2,17 +2,13 @@ package com.anservice.core.user.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @Builder
 @Entity
-@RequiredArgsConstructor
 @Table(name = "kp_user")
 public class User {
 
@@ -20,16 +16,18 @@ public class User {
     user attributes will contain
     -- Adjust 'AtomicLong' when concurrent issue occurs.
     -- After select DB engine, Adjust '@GeneratedValue(strategy = GenerationType.IDENTITY)' to @Id
+    -- Disable @Setter annotation in 'uid' schema
      */
 
     public static final long PID = 0;
 
     @Id
-    @Column(name = "user_id", updatable = false)
+    @Getter
     @Setter
+    @Column(name = "user_id", updatable = false)
     public String uid;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", updatable = false)
     @Schema(defaultValue = "example1994")
     public String userName;
 
