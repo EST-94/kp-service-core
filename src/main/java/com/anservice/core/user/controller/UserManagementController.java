@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +25,23 @@ public class UserManagementController {
 
     private final UserManagementService userManagementService;
 
-    @Operation(summary = "get user information")
+    @Operation(summary = "get user information with pagination")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "search success")
+    })
+    @GetMapping("/lists")
+    public ResponseEntity<Page<User>> getUserWithPagination(Pageable pageable) {
+        return new ResponseEntity<>(userManagementService.getAllUsers(pageable), HttpStatus.OK);
+    }
+
+    @Operation(summary = "get specific user information")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "search success")
     })
     @GetMapping
-    public ResponseEntity<UserServiceResponse> getUser(
+    public ResponseEntity<User> getUser(
             @RequestParam String userId) {
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userManagementService.getSpecificUser(userId), HttpStatus.OK);
     }
 
     @Operation(summary = "update user information")

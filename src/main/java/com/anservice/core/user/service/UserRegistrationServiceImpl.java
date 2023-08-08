@@ -24,9 +24,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         response.setDefault("submitUser");
 
         user.setUid("test-" + generateUtil.randomString(5));
-        /*
+
+        /* TODO:
         Validation logic need - email, username
          */
+
         try {
             userRepository.save(user);
             response.setSuccess();

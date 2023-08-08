@@ -18,6 +18,13 @@ public interface UserRepository extends JpaRepository<User, String> {
     Page<User> findAll(Pageable pageable);
 
     /**
+     * Get specific user with uid.
+     * @param uid target user's uid
+     * @return target user's DTO
+     */
+    User findByUid(String uid);
+
+    /**
      * delete user by its id
      *
      * @param uid target user id
