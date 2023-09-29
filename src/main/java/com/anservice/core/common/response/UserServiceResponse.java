@@ -28,6 +28,13 @@ public class UserServiceResponse {
         log.error("[{}] failed, trace : {}", this.taskName, e.toString());
     }
 
+    public void setFailed(InternalTaskResponse response) {
+        this.taskStatus = response.getTaskStatus();
+        this.errorMsg = response.getErrorMsg();
+        this.responseStatus = response.getErrorStatus();
+        log.error("[{}] failed, trace : {}", this.taskName, errorMsg);
+    }
+
     public void setSuccess() {
         this.taskStatus = TaskStatus.SUCCESS;
     }

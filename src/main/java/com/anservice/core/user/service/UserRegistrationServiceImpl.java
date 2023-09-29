@@ -3,6 +3,7 @@ package com.anservice.core.user.service;
 import com.anservice.core.common.constants.InternalTaskResponse;
 import com.anservice.core.common.response.UserServiceResponse;
 import com.anservice.core.common.util.GenerateUtil;
+import com.anservice.core.user.common.UserServiceValidation;
 import com.anservice.core.user.model.User;
 import com.anservice.core.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
+
+    private final UserServiceValidation userServiceValidation;
 
     private final UserRepository userRepository;
 
@@ -25,9 +28,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         user.setUid("test-" + generateUtil.randomString(5));
 
-        /* TODO:
-        Validation logic need - email, username
-         */
+        if (!userServiceValidation.creation(user)) {
+            response.setFailed(InternalTaskResponse.VALIDATION_FAILED_CREATE);
+            return response;
+        }
 
         try {
             userRepository.save(user);

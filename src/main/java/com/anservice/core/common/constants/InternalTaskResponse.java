@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 public enum InternalTaskResponse {
 
     VALIDATION_FAILED_UNAUTHORIZED(TaskStatus.STARTING, "Unauthorized Access", HttpStatus.UNAUTHORIZED),
+    VALIDATION_FAILED_CREATE(TaskStatus.STARTING, "Validation failed for create USER.", HttpStatus.BAD_REQUEST),
     USER_INSERT_FAILED(TaskStatus.FAILED, "User Insert failed", HttpStatus.INTERNAL_SERVER_ERROR),
     USER_DELETE_FAILED(TaskStatus.FAILED, "User Delete failed", HttpStatus.INTERNAL_SERVER_ERROR),
     USER_UPDATE_FAILED(TaskStatus.FAILED, "User Update failed", HttpStatus.INTERNAL_SERVER_ERROR);
